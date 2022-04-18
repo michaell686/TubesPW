@@ -1,20 +1,11 @@
 <?php
-    include('koneksi.php');
+    include('../../../koneksi.php');
+    include('../../functions/Prize_ChancesFunction.php');
 
-    if (!empty($_POST)) {
-        
-        $id = isset($_POST['id']) && !empty($_POST['id']) && $_POST['id'] != 'auto' ? $_POST['id'] : NULL;
-        $prize_id = isset($_POST['prize_id']) ? $_POST['prize_id'] : '';
-        $type_chances_id = isset($_POST['type_chances_id']) ? $_POST['type_chances_id'] : '';
-        
-        $query = "INSERT INTO prize_chances (id, prize_id, type_chances_id) VALUES ('$id', '$prize_id', '$type_chances_id')";
-        $result = mysqli_query($koneksi,$query);
+    session_start();
 
-        if($result) {
-            $msg = 'Inserted Successfully!';
-        } else {
-            $msg = 'Failed to insert data!';
-        }
+    if (!isset($_SESSION['my_session'])) {
+        $_SESSION['my_session'] = false;
     }
 ?>
 <html lang="en">
@@ -25,17 +16,27 @@
     <title>Document</title>
 </head>
 <body>
+    <?php
+        if ($_SESSION['my_session']) {
+        if (!empty($_POST)) {
+            $msg = addPrize_chances($_POST['id'], $_POST['prize_id'], $_POST['type_chances_id']);
+        }
+    ?>
     <div>
         <form action="add.php" method="post">
             <div><?php if(isset($msg)) { echo $msg; } ?></div>
             <label for="id">id</label><br>
-            <input type="text" value="<?= $prize_chances['id']; ?>" id="id" id="id"><br>
+            <input type="text" id="id" id="id"><br>
             <label for="prize_id">prize_id</label><br>
-            <input type="text" value="<?= $prize_chances['prize_id']; ?>" name="prize_id" id="prize_id"><br>
+            <input type="text" name="prize_id" id="prize_id"><br>
             <label for="type_chances_id">type_chances_id</label><br>
-            <input type="text" value="<?= $prize_chances['type_chances_id']; ?>" name="type_chances_id" id="type_chances_id"><br>
+            <input type="text" name="type_chances_id" id="type_chances_id"><br>
             <input type="submit" value="submit">
         </form>
     </div>
+    <a href="index.php">Back to Prize Chances</a>
+    <?php
+        }
+    ?>
 </body>
 </html>

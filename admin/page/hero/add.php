@@ -1,6 +1,12 @@
 <?php
-    include('koneksi.php');
+    include('../../../koneksi.php');
     include('../../functions/HeroFunction.php');
+
+    session_start();
+
+    if (!isset($_SESSION['my_session'])) {
+        $_SESSION['my_session'] = false;
+    }
 ?>
 <html lang="en">
 <head>
@@ -11,6 +17,7 @@
 </head>
 <body>
     <?php
+        if ($_SESSION['my_session']) {
         if (!empty($_POST)) {
             $msg = addHero($_POST['name'], $_POST['attack'], $_POST['health'], $_POST['description']);
         }
@@ -29,5 +36,9 @@
             <input type="submit" value="submit">
         </form>
     </div>
+    <a href="index.php">Back to hero</a>
+    <?php
+        }
+    ?>
 </body>
 </html>

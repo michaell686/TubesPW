@@ -1,32 +1,11 @@
 <?php
-    include('koneksi.php');
+    include('../../../koneksi.php');
+    include('../../functions/Prize_life_tokenFunction.php');
 
-    if (isset($_GET['id'])) {
-        if (!empty($_POST)) {
-           
-            $id = isset($_POST['id']) ? $_POST['id'] : NULL;
-            $token = isset($_POST['token']) ? $_POST['token'] : '';
-            $chances = isset($_POST['chances']) ? $_POST['chances'] : '';
-            
-            $query = "UPDATE prize_chances set id='" . $id . "', token='" . $token . "'  chances='" .$chances ."' WHERE id='" . $_POST['id'] . "'";
-            $result = mysqli_query($koneksi,$query);
+    session_start();
 
-            if($result) {
-                $msg = 'Updated Successfully!';
-            } else {
-                $msg = 'Failed to update data!';
-            }
-        }
-
-        $query = "SELECT * FROM prize_life_token WHERE id = '" . $_GET['id'] . "'";
-        $result = mysqli_query($koneksi, $query);
-        $prize_life_token = mysqli_fetch_array($result);
-
-        if (!$prize_life_token) {
-            exit('prize_life_token doesn\'t exist with that ID!');
-        }
-    } else {
-        exit('No ID specified!');
+    if (!isset($_SESSION['my_session'])) {
+        $_SESSION['my_session'] = false;
     }
 ?>
 <html lang="en">
@@ -37,19 +16,32 @@
     <title>Document</title>
 </head>
 <body>
+    <?php
+        if ($_SESSION['my_session']) {
+        if (isset($_GET['id'])) {
+            if (!empty($_POST)) {
+                $msg = updatePrize_life_token($_GET['id'], $_POST['token'], $_POST['chances']);
+            }
+            $prize_life_token = getPrize_life_tokenByID($_GET['id']);
+        } else {
+            exit('No ID specified!');
+        }
+    ?>
     <h1>Edit Prize_life_token</h1>
     <div>
         <form action="edit.php?id=<?=$prize_life_token['id']?>" method="post">
             <div><?php if(isset($msg)) { echo $msg; } ?></div>
-            <label for="id">id</label><br>
-            <input type="text" value="<?= $prize_life_token['id']; ?>" id="id" id="id"><br>
+            <input type="hidden" value="<?= $prize_life_token['id']; ?>" id="id" id="id"><br>
             <label for="token">token</label><br>
             <input type="text" value="<?= $prize_life_token['token']; ?>" name="token" id="token"><br>
             <label for="chances">chances</label><br>
-            <input type="text" value="<?= $prize_life_token['chances']; ?>" name="chances" id="type_chances_id"><br>
+            <input type="text" value="<?= $prize_life_token['chances']; ?>" name="chances" id="chances"><br>
             <input type="submit" value="submit">
         </form>
     </div>
     <a href="index.php">Back to prize_life_token</a>
+    <?php
+        }
+    ?>
 </body>
 </html>

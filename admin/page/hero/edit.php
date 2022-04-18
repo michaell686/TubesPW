@@ -1,6 +1,12 @@
 <?php
-    include('koneksi.php');
+    include('../../../koneksi.php');
     include('../../functions/HeroFunction.php');
+
+    session_start();
+
+    if (!isset($_SESSION['my_session'])) {
+        $_SESSION['my_session'] = false;
+    }
 ?>
 <html lang="en">
 <head>
@@ -11,6 +17,7 @@
 </head>
 <body>
     <?php
+        if ($_SESSION['my_session']) {
         if (isset($_GET['id'])) {
             if (!empty($_POST)) {
                 $msg = updateHero($_GET['id'], $_POST['name'], $_POST['attack'], $_POST['health'], $_POST['description']);
@@ -24,7 +31,7 @@
     <div>
         <form action="edit.php?id=<?=$hero['id']?>" method="post">
             <div><?php if(isset($msg)) { echo $msg; } ?></div>
-            <input type="text" value="<?= $hero['id']; ?>" id="id" id="id"><br>
+            <input type="hidden" value="<?= $hero['id']; ?>" id="id" id="id"><br>
             <label for="name">Name</label><br>
             <input type="text" value="<?= $hero['name']; ?>" name="name" id="name"><br>
             <label for="attack">Attack</label><br>
@@ -37,5 +44,8 @@
         </form>
     </div>
     <a href="index.php">Back to Hero</a>
+    <?php
+        }
+    ?>
 </body>
 </html>

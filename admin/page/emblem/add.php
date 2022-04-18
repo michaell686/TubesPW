@@ -1,6 +1,11 @@
 <?php
-    include('koneksi.php');
+    include('../../../koneksi.php');
     include('../../functions/EmblemFunction.php');
+    session_start();
+
+    if (!isset($_SESSION['my_session'])) {
+        $_SESSION['my_session'] = false;
+    }
 ?>
 <html lang="en">
 <head>
@@ -11,8 +16,9 @@
 </head>
 <body>
     <?php
+        if ($_SESSION['my_session']) {
         if (!empty($_POST)) {
-            $msg = addEmblem($_POST['id'], $_POST['nama']);
+            $msg = addEmblem($_POST['nama']);
         }
     ?>
     <h1>Add Emblem</h1>
@@ -26,5 +32,8 @@
         </form>
     </div>
     <a href="index.php">Back to emblem</a>
+    <?php
+        }
+    ?>
 </body>
 </html>

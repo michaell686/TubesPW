@@ -1,7 +1,7 @@
 <?php
-    function getMap(){
+    function getPrize_chances(){
         $link= include('../../../koneksi.php');
-        $query= "SELECT * FROM map";
+        $query= "SELECT * FROM prize_chances";
         $result = mysqli_query($koneksi, $query);
         if(!$result){
             return $result = die ("Query Error: ".mysqli_errno($koneksi).
@@ -10,26 +10,25 @@
         return $result;
     }
 
-    function getMapByID($id){
+    function getPrize_chancesById($id){
         $link= include('../../../koneksi.php');
-        $query = "SELECT * FROM map WHERE id = '" . $id . "'";
+        $query = "SELECT * FROM prize_chances WHERE id = '" . $id . "'";
         $result = mysqli_query($koneksi, $query);
-        $map = mysqli_fetch_array($result);
+        $prize_chances = mysqli_fetch_array($result);
 
-        if (!$map) {
-           return exit('map doesn\'t exist with that ID!');
+        if (!$prize_chances) {
+           return exit('prize_chances doesn\'t exist with that ID!');
         }
         
-        return $map;
+        return $prize_chances;
     }
     
-    function addMap($nama, $shape, $coords){
+    function addPrize_chances($prize_id, $type_chances_id){
         $link= include('../../../koneksi.php');
-        $namaVar = isset($nama) ? $nama : '';
-        $shapeVar = isset($shape) ? $shape : '';
-        $coordsVar = isset($coords) ? $coords : '';
+        $prize_idVar = isset($prize_id) ? $prize_id : '';
+        $type_chances_idVar = isset($type_chances_id) ? $type_chances_id : '';
         
-        $query = "INSERT INTO map (nama, shape, coords) VALUES ('$namaVar', '$shapeVar', '$coordsVar')";
+        $query = "INSERT INTO prize_chances (prize_id, type_chances_id) VALUES ('$prize_idVar', '$type_chances_idVar')";
         $result = mysqli_query($koneksi,$query);
 
         if($result) {
@@ -39,14 +38,13 @@
         }
     }
 
-    function updateMap($id, $nama, $shape, $coords) {
+    function updatePrize_chances($id, $prize_id, $type_chances_id) {
         $link= include('../../../koneksi.php');
         $idVar = isset($id) ? $id : NULL;
-        $namaVar = isset($nama) ? $nama : '';
-        $shapeVar = isset($shape) ? $shape : '';
-        $coordsVar = isset($coords) ? $coords : '';
+        $prize_idVar = isset($prize_id) ? $prize_id : '';
+        $type_chances_idVar = isset($type_chances_id) ? $type_chances_id : '';
         
-        $query = "UPDATE map set nama='" . $namaVar . "', shape='" . $shapeVar . "', coords='" . $coordsVar . "' WHERE id='" . $idVar . "'";
+        $query = "UPDATE prize_chances set  prize_id='" . $prize_idVar . "', type_chances_idVar='" . $deskripsiVar . "', WHERE id='" . $idVar . "'";
         $result = mysqli_query($koneksi,$query);
 
         if($result) {
@@ -56,9 +54,9 @@
         }
     }
     
-    function deleteMap($id){
+    function deletePrize_chances($id){
         $link= include('../../../koneksi.php');
-        $query = "DELETE FROM map WHERE id='" . $id . "'";
+        $query = "DELETE FROM prize_chances WHERE id='" . $id . "'";
 
         if (mysqli_query($koneksi, $query)) {
             return $msg = "Deleted successfully <br>";

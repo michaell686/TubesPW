@@ -1,21 +1,10 @@
 <?php
-    include('koneksi.php');
+    include('../../../koneksi.php');
+    include('../../functions/MapFunction.php');
+    session_start();
 
-    if (!empty($_POST)) {
-        
-        $id = isset($_POST['id']) && !empty($_POST['id']) && $_POST['id'] != 'auto' ? $_POST['id'] : NULL;
-        $nama = isset($_POST['nama']) ? $_POST['nama'] : '';
-        $shape = isset($_POST['shape']) ? $_POST['shape'] : '';
-        $coords = isset($_POST['coords']) ? $_POST['coords'] : '';   
-        
-        $query = "INSERT INTO map (id, nama, shape, coords) VALUES ('$id', '$nama', '$shape, $coords')";
-        $result = mysqli_query($koneksi,$query);
-
-        if($result) {
-            $msg = 'Inserted Successfully!';
-        } else {
-            $msg = 'Failed to insert data!';
-        }
+    if (!isset($_SESSION['my_session'])) {
+        $_SESSION['my_session'] = false;
     }
 ?>
 <html lang="en">
@@ -26,19 +15,27 @@
     <title>Document</title>
 </head>
 <body>
+    <?php
+        if ($_SESSION['my_session']) {  
+        if (!empty($_POST)) {
+            $msg = addMap($_POST['nama'], $_POST['shape'], $_POST['coords']);
+        }
+    ?>
     <div>
         <form action="add.php" method="post">
             <div><?php if(isset($msg)) { echo $msg; } ?></div>
-            <label for="id">id</label><br>
-            <input type="text" value="<?= $map['id']; ?>" id="id" id="id"><br>
             <label for="nama">nama</label><br>
-            <input type="text" value="<?= $prize_nama['nama']; ?>" name="nama" id="nama"><br>
+            <input type="text"  name="nama" id="nama"><br>
             <label for="shape">shape</label><br>
-            <input type="text" value="<?= $map['shape']; ?>" name="shape" id="shape"><br>
+            <input type="text"  name="shape" id="shape"><br>
             <label for="coords">coords</label><br>
-            <input type="text" value="<?= $map['coords']; ?>" name="coords" id="coords"><br>
+            <input type="text"  name="coords" id="coords"><br>
             <input type="submit" value="submit">
         </form>
     </div>
+    <a href="index.php">Back to map</a>
+    <?php
+        }
+    ?>
 </body>
 </html>

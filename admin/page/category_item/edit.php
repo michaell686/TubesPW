@@ -1,32 +1,11 @@
 <?php
-    include('koneksi.php');
+    include('../../../koneksi.php');
+    include('../../functions/Category_ItemFunction.php');
 
-    if (isset($_GET['id'])) {
-        if (!empty($_POST)) {
-           
-            $id = isset($_POST['id']) ? $_POST['id'] : NULL;
-            $category_name = isset($_POST['category_name']) ? $_POST['category_name'] : '';
-           
-            
-            $query = "UPDATE category_item set id='" . $id . "', category_name='" . $category_name . "' WHERE id='" . $_POST['id'] . "'";
-            $result = mysqli_query($koneksi,$query);
+    session_start();
 
-            if($result) {
-                $msg = 'Updated Successfully!';
-            } else {
-                $msg = 'Failed to update data!';
-            }
-        }
-
-        $query = "SELECT * FROM category_item WHERE id = '" . $_GET['id'] . "'";
-        $result = mysqli_query($koneksi, $query);
-        $category_item = mysqli_fetch_array($result);
-
-        if (!$category_item) {
-            exit('category_item doesn\'t exist with that ID!');
-        }
-    } else {
-        exit('No ID specified!');
+    if (!isset($_SESSION['my_session'])) {
+        $_SESSION['my_session'] = false;
     }
 ?>
 <html lang="en">
@@ -37,23 +16,31 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>Edit Hero</h1>
+    <?php
+        if ($_SESSION['my_session']) {
+        if (isset($_GET['id'])) {
+            if (!empty($_POST)) {
+                $msg = updateCategory_item($_GET['id'], $_POST['category_name']);
+            }
+            $category_item = getCategory_itemById($_GET['id']);
+        } else {
+            exit('No ID specified!');
+        }
+    ?>
+    <h1>Edit Emblem</h1>
     <div>
         <form action="edit.php?id=<?=$category_item['id']?>" method="post">
             <div><?php if(isset($msg)) { echo $msg; } ?></div>
-            <label for="id">id</label><br>
+            <label for="id">Id</label><br>
             <input type="text" value="<?= $category_item['id']; ?>" id="id" id="id"><br>
-            <label for="name">name</label><br>
-            <input type="text" value="<?= $category_item['name']; ?>" name="name" id="name"><br>
-            <label for="attack">attack</label><br>
-            <input type="text" value="<?= $category_item['attack']; ?>" name="attack" id="attack"><br>
-            <label for="health">health</label><br>
-            <input type="text" value="<?= $category_item['health']; ?>" name="health" id="health"><br>
-            <label for="description">description</label><br>
-            <input type="text" value="<?= $category_item['description']; ?>" name="description" id="description"><br>
+            <label for="category_name">Category Name</label><br>
+            <input type="text" value="<?= $category_item['category_name']; ?>" name="category_name" id="category_name"><br>
             <input type="submit" value="submit">
         </form>
     </div>
-    <a href="index.php">Back to category_item</a>
+    <a href="index.php">Back to Category Item</a>
+    <?php
+        }
+    ?>
 </body>
 </html>

@@ -1,12 +1,19 @@
 <?php
-    include('koneksi.php');
-    
-    $query = "DELETE FROM prize_chances WHERE id='" . $_GET["id"] . "'";
+    include('../../../koneksi.php');
+    include('../../functions/Prize_ChancesFunction.php');
+    session_start();
 
-    if (mysqli_query($koneksi, $query)) {
-        echo "Deleted successfully";
-    } else {
-        echo "Error deleting record: " . mysqli_error($koneksi);
+    if (!isset($_SESSION['my_session'])) {
+        $_SESSION['my_session'] = false;
+    }
+    
+    $msg = deletePrize_chances($_GET['id']);
+?>
+<?php
+    if ($_SESSION['my_session']) {
+?>
+<div><?php if(isset($msg)) { echo $msg; } ?></div>
+<a href="index.php">Back to Hero</a>
+<?php
     }
 ?>
-<a href="index.php">Back to prize_chances</a>

@@ -1,6 +1,12 @@
 <?php
-    include('koneksi.php');
+    include('../../../koneksi.php');
     include('../../functions/MapFunction.php');
+
+    session_start();
+
+    if (!isset($_SESSION['my_session'])) {
+        $_SESSION['my_session'] = false;
+    }
 ?>
 <html lang="en">
 <head>
@@ -34,6 +40,7 @@
 </head>
 <body>
     <?php
+        if ($_SESSION['my_session']) {
         $map = getMap();
     ?>
 
@@ -45,23 +52,25 @@
                 <th>ID</th>
                 <th>Nama</th>
                 <th>Shape</th>
-                <th>Coords</th>=
+                <th>Coords</th>
                 <th>Opsi</th>
             </tr>
 
             <?php
-                while ($hero = mysqli_fetch_array($result)) {  
+                foreach($map as $map) {
             ?>
                     <tr>
-                    <td><?=$hero['id']?></td>
-                    <td><?=$hero['nama']?></td>
-                    <td><?=$hero['shaape']?></td>
-                    <td><?=$hero['coords']?></td>
-                    <td><a href="edit.php?id=<?=$hero['id']?>">Edit</a> <a href='delete.php?id=<?php echo $hero["id"]; ?>'>Delete</a></td>
+                    <td><?=$map['id']?></td>
+                    <td><?=$map['nama']?></td>
+                    <td><?=$map['shape']?></td>
+                    <td><?=$map['coords']?></td> 
+                    <td><a href="edit.php?id=<?=$map['id']?>">Edit</a> 
+                    <a href='delete.php?id=<?php echo $map["id"]; ?>'>Delete</a></td>
                     </tr>
-            <?php
-                }
-            ?>
+        <?php
+            }
+        }    
+        ?>
         </table>
     </div>    
 </body>

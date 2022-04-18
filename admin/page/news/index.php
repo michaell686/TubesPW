@@ -1,5 +1,12 @@
 <?php
-    include('koneksi.php');
+    include('../../../koneksi.php');
+    include('../../functions/NewsFunction.php');
+
+    session_start();
+
+    if (!isset($_SESSION['my_session'])) {
+        $_SESSION['my_session'] = false;
+    }
 ?>
 <html lang="en">
 <head>
@@ -32,19 +39,14 @@
     </style>
 </head>
 <body>
-    <?php
-        $query = "SELECT * FROM news ";
-        $result = mysqli_query($koneksi, $query);
-   
-        if(!$result){
-        die ("Query Error: ".mysqli_errno($koneksi).
-            " - ".mysqli_error($koneksi));
-        }
+<?php
+        if ($_SESSION['my_session']) {
+        $news = getNews();
     ?>
 
     <div>
         <h1>Hero</h1>
-        <a href="add.php">tambah Hero</a>
+        <a href="add.php">tambah News</a>
         <table border="1px" class="tabel"> 
             <tr>
                 <th>ID</th>
@@ -56,18 +58,20 @@
             </tr>
 
             <?php
-                while ($hero = mysqli_fetch_array($result)) {  
+                foreach($news as $news) {
             ?>
                     <tr>
-                    <td><?=$hero['id']?></td>
-                    <td><?=$hero['judul']?></td>
-                    <td><?=$hero['gambar']?></td>
-                    <td><?=$hero['deskripsi']?></td>
-                    <td><?=$hero['newscol']?></td>
-                    <td><a href="edit.php?id=<?=$hero['id']?>">Edit</a> <a href='delete.php?id=<?php echo $hero["id"]; ?>'>Delete</a></td>
+                    <td><?=$news['id']?></td>
+                    <td><?=$news['judul']?></td>
+                    <td><?=$news['gambar']?></td>
+                    <td><?=$news['deskripsi']?></td> 
+                    <td><?=$news['newscol']?></td> 
+                    <td><a href="edit.php?id=<?=$news['id']?>">Edit</a> 
+                    <a href='delete.php?id=<?php echo $news["id"]; ?>'>Delete</a></td>
                     </tr>
             <?php
                 }
+            }    
             ?>
         </table>
     </div>    

@@ -1,8 +1,6 @@
 <?php
-    $link= include('koneksi.php');
-
     function getEmblem(){
-        $link= include('koneksi.php');
+        $link= include('../../../koneksi.php');
         $query= "SELECT * FROM emblem";
         $result = mysqli_query($koneksi, $query);
         if(!$result){
@@ -13,7 +11,7 @@
     }
 
     function getEmblemById($id){
-        $link= include('koneksi.php');
+        $link= include('../../../koneksi.php');
         $query = "SELECT * FROM emblem WHERE id = '" . $id . "'";
         $result = mysqli_query($koneksi, $query);
         $emblem = mysqli_fetch_array($result);
@@ -24,12 +22,11 @@
         return $emblem;
     }
     
-    function addEmblem($id, $nama){
-        $link= include('koneksi.php');
-        $idVar = isset($id) ? $id : '';
+    function addEmblem($nama){
+        $link= include('../../../koneksi.php');
         $namaVar = isset($nama) ? $nama : '';
         
-        $query = "INSERT INTO emblem (id, nama) VALUES ('$idVar', '$namaVar')";
+        $query = "INSERT INTO emblem (nama) VALUES ('$namaVar')";
         $result = mysqli_query($koneksi,$query);
 
         if($result) {
@@ -40,7 +37,7 @@
     }
 
     function updateEmblem($id, $nama) {
-        $link= include('koneksi.php');
+        $link= include('../../../koneksi.php');
         $idVar = isset($id) ? $id : NULL;
         $namaVar = isset($nama) ? $nama : '';
         
@@ -55,7 +52,7 @@
     }
     
     function deleteEmblem($id){
-        $link= include('koneksi.php');
+        $link= include('../../../koneksi.php');
         $query = "DELETE FROM emblem WHERE id='" . $id . "'";
 
         if (mysqli_query($koneksi, $query)) {

@@ -1,6 +1,12 @@
 <?php
-    include('koneksi.php');
+    include('../../../koneksi.php');
     include('../../functions/HomeFunction.php');
+
+    session_start();
+
+    if (!isset($_SESSION['my_session'])) {
+        $_SESSION['my_session'] = false;
+    }
 ?>
 <html lang="en">
 <head>
@@ -11,6 +17,7 @@
 </head>
 <body>
     <?php
+        if ($_SESSION['my_session']) {
         if (isset($_GET['id'])) {
             if (!empty($_POST)) {
                 $msg = updateHome($_GET['id'], $_POST['nama'], $_POST['video_url']);
@@ -33,5 +40,8 @@
         </form>
     </div>
     <a href="index.php">Back to home</a>
+    <?php
+        }
+    ?>
 </body>
 </html>

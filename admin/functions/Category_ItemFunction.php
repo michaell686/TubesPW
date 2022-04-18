@@ -1,7 +1,7 @@
 <?php
-    function getMap(){
+    function getCategory_item(){
         $link= include('../../../koneksi.php');
-        $query= "SELECT * FROM map";
+        $query= "SELECT * FROM category_item";
         $result = mysqli_query($koneksi, $query);
         if(!$result){
             return $result = die ("Query Error: ".mysqli_errno($koneksi).
@@ -10,27 +10,25 @@
         return $result;
     }
 
-    function getMapByID($id){
+    function getCategory_itemById($id){
         $link= include('../../../koneksi.php');
-        $query = "SELECT * FROM map WHERE id = '" . $id . "'";
+        $query = "SELECT * FROM category_item WHERE id = '" . $id . "'";
         $result = mysqli_query($koneksi, $query);
-        $map = mysqli_fetch_array($result);
+        $emblem = mysqli_fetch_array($result);
 
-        if (!$map) {
-           return exit('map doesn\'t exist with that ID!');
+        if (!$emblem) {
+           return exit('emblem doesn\'t exist with that ID!');
         }
-        
-        return $map;
+        return $emblem;
     }
     
-    function addMap($nama, $shape, $coords){
+    function addCategory_item($category_name){
         $link= include('../../../koneksi.php');
-        $namaVar = isset($nama) ? $nama : '';
-        $shapeVar = isset($shape) ? $shape : '';
-        $coordsVar = isset($coords) ? $coords : '';
+        $category_NameVar = isset($category_name) ? $category_name : '';
         
-        $query = "INSERT INTO map (nama, shape, coords) VALUES ('$namaVar', '$shapeVar', '$coordsVar')";
+        $query = "INSERT INTO category_item (category_name) VALUES ('$category_NameVar')";
         $result = mysqli_query($koneksi,$query);
+        var_dump($result);
 
         if($result) {
             return $result = 'Inserted Successfully!';
@@ -39,14 +37,12 @@
         }
     }
 
-    function updateMap($id, $nama, $shape, $coords) {
+    function updateCategory_item($id, $category_name) {
         $link= include('../../../koneksi.php');
         $idVar = isset($id) ? $id : NULL;
-        $namaVar = isset($nama) ? $nama : '';
-        $shapeVar = isset($shape) ? $shape : '';
-        $coordsVar = isset($coords) ? $coords : '';
+        $category_NameVar = isset($category_name) ? $category_name : '';
         
-        $query = "UPDATE map set nama='" . $namaVar . "', shape='" . $shapeVar . "', coords='" . $coordsVar . "' WHERE id='" . $idVar . "'";
+        $query = "UPDATE category_item set category_name='" . $category_NameVar . "' WHERE id='" . $idVar . "'";
         $result = mysqli_query($koneksi,$query);
 
         if($result) {
@@ -56,9 +52,9 @@
         }
     }
     
-    function deleteMap($id){
+    function deleteCategory_item($id){
         $link= include('../../../koneksi.php');
-        $query = "DELETE FROM map WHERE id='" . $id . "'";
+        $query = "DELETE FROM category_item WHERE id='" . $id . "'";
 
         if (mysqli_query($koneksi, $query)) {
             return $msg = "Deleted successfully <br>";

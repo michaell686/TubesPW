@@ -1,8 +1,6 @@
 <?php
-    $link= include('koneksi.php');
-
     function getHome(){
-        $link= include('koneksi.php');
+        $link= include('../../../koneksi.php');
         $query= "SELECT * FROM home";
         $result = mysqli_query($koneksi, $query);
         if(!$result){
@@ -13,7 +11,7 @@
     }
 
     function getHomeById($id){
-        $link= include('koneksi.php');
+        $link= include('../../../koneksi.php');
         $query = "SELECT * FROM home WHERE id = '" . $id . "'";
         $result = mysqli_query($koneksi, $query);
         $home = mysqli_fetch_array($result);
@@ -24,13 +22,12 @@
         return $home;
     }
     
-    function addHome($id, $nama, $video_url){
-        $link= include('koneksi.php');
-        $idVar = isset($id) ? $id : '';
+    function addHome($nama, $video_url){
+        $link= include('../../../koneksi.php');
         $namaVar = isset($nama) ? $nama : '';
         $video_urlVar = isset($video_url) ? $video_url : '';
         
-        $query = "INSERT INTO feeedback (id, nama, video_url) VALUES ('$idVar', '$namaVar', '$video_urlVar')";
+        $query = "INSERT INTO home (nama, video_url) VALUES ('$namaVar', '$video_urlVar')";
         $result = mysqli_query($koneksi,$query);
 
         if($result) {
@@ -41,12 +38,12 @@
     }
 
     function updateHome($id, $nama, $video_url) {
-        $link= include('koneksi.php');
+        $link= include('../../../koneksi.php');
         $idVar = isset($id) ? $id : NULL;
         $namaVar = isset($nama) ? $nama : '';
         $video_urlVar = isset($video_url) ? $video_url : '';
         
-        $query = "UPDATE feedback set nama='" . $namaVar . "', video_url='" . $video_urlVar . "' WHERE id='" . $idVar . "'";
+        $query = "UPDATE home set nama='" . $namaVar . "', video_url='" . $video_urlVar . "' WHERE id='" . $idVar . "'";
         $result = mysqli_query($koneksi,$query);
 
         if($result) {
@@ -57,7 +54,7 @@
     }
     
     function deleteHome($id){
-        $link= include('koneksi.php');
+        $link= include('../../../koneksi.php');
         $query = "DELETE FROM home WHERE id='" . $id . "'";
 
         if (mysqli_query($koneksi, $query)) {

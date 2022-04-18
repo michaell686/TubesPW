@@ -1,32 +1,11 @@
 <?php
-    include('koneksi.php');
+    include('../../../koneksi.php');
+    include('../../functions/Prize_ChancesFunction.php');
 
-    if (isset($_GET['id'])) {
-        if (!empty($_POST)) {
-           
-            $id = isset($_POST['id']) ? $_POST['id'] : NULL;
-            $prize_id = isset($_POST['prize_id']) ? $_POST['prize_id'] : '';
-            $type_chances_id = isset($_POST['type_chances_id']) ? $_POST['type_chances_id'] : '';
-            
-            $query = "UPDATE prize_chances set id='" . $id . "', prize_id='" . $prize_id . "'  type_chances_id='" .$type_chances_id ."' WHERE id='" . $_POST['id'] . "'";
-            $result = mysqli_query($koneksi,$query);
+    session_start();
 
-            if($result) {
-                $msg = 'Updated Successfully!';
-            } else {
-                $msg = 'Failed to update data!';
-            }
-        }
-
-        $query = "SELECT * FROM prize_chances WHERE id = '" . $_GET['id'] . "'";
-        $result = mysqli_query($koneksi, $query);
-        $prize_chances = mysqli_fetch_array($result);
-
-        if (!$prize_chances) {
-            exit('prize_chances doesn\'t exist with that ID!');
-        }
-    } else {
-        exit('No ID specified!');
+    if (!isset($_SESSION['my_session'])) {
+        $_SESSION['my_session'] = false;
     }
 ?>
 <html lang="en">
@@ -37,6 +16,17 @@
     <title>Document</title>
 </head>
 <body>
+    <?php
+        if ($_SESSION['my_session']) {
+        if (isset($_GET['id'])) {
+            if (!empty($_POST)) {
+                $msg = updatePrize_chances($_GET['id'], $_POST['prize_id'], $_POST['type_chances_id']);
+            }
+            $prize_chances = getPrize_chances($_GET['id']);
+        } else {
+            exit('No ID specified!');
+        }
+    ?>
     <h1>Edit Prize_chances</h1>
     <div>
         <form action="edit.php?id=<?=$prize_chances['id']?>" method="post">
@@ -51,5 +41,8 @@
         </form>
     </div>
     <a href="index.php">Back to prize_chances</a>
+    <?php
+        }
+    ?>
 </body>
 </html>

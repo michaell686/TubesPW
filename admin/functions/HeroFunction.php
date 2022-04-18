@@ -1,9 +1,7 @@
 <?php
-    $link= include('koneksi.php');
-
     function getHero(){
-        $link= include('koneksi.php');
-        $query= "SELECT * FROM hero";
+        $link= include('../../../koneksi.php');
+        $query= "SELECT * FROM hero";   
         $result = mysqli_query($koneksi, $query);
         if(!$result){
             return $result = die ("Query Error: ".mysqli_errno($koneksi).
@@ -13,7 +11,7 @@
     }
 
     function getHeroById($id){
-        $link= include('koneksi.php');
+        $link= include('../../../koneksi.php');
         $query = "SELECT * FROM hero WHERE id = '" . $id . "'";
         $result = mysqli_query($koneksi, $query);
         $hero = mysqli_fetch_array($result);
@@ -26,7 +24,7 @@
     }
     
     function addHero($name, $attack, $health, $description){
-        $link= include('koneksi.php');
+        $link= include('../../../koneksi.php');
         $nameVar = isset($name) ? $name : '';
         $attackVar = isset($attack) ? $attack : '';
         $healthVar = isset($health) ? $health : '';
@@ -43,14 +41,14 @@
     }
 
     function updateHero($id, $name, $attack, $health, $description) {
-        $link= include('koneksi.php');
+        $link= include('../../../koneksi.php');
         $idVar = isset($id) ? $id : NULL;
         $nameVar = isset($name) ? $name : '';
         $attackVar = isset($attack) ? $attack : '';
         $healthVar = isset($health) ? $health : '';
         $descriptionVar = isset($description) ? $description : '';
         
-        $query = "UPDATE hero set name='" . $nameVar . "', attack='" . $attackVar . "', health='" . $healthVar . "' ,description='" . $descriptionVar .  "' WHERE id='" . $idVar . "'";
+        $query = "UPDATE hero set name='" . $nameVar . "', attack='" . $attackVar . "', health='" . $healthVar . "' ,description='" . $descriptionVar . "' WHERE id='" . $idVar . "'";
         $result = mysqli_query($koneksi,$query);
 
         if($result) {
@@ -61,7 +59,7 @@
     }
     
     function deleteHero($id){
-        $link= include('koneksi.php');
+        $link= include('../../../koneksi.php');
         $query = "DELETE FROM hero WHERE id='" . $id . "'";
 
         if (mysqli_query($koneksi, $query)) {

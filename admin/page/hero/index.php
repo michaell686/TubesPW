@@ -1,6 +1,12 @@
 <?php
-    include('koneksi.php');
+    include('../../../koneksi.php');
     include('../../functions/HeroFunction.php');
+
+    session_start();
+
+    if (!isset($_SESSION['my_session'])) {
+        $_SESSION['my_session'] = false;
+    }
 ?>
 <html lang="en">
 <head>
@@ -33,7 +39,9 @@
     </style>
 </head>
 <body>
+
     <?php
+        if ($_SESSION['my_session']) {
         $heroes = getHero();
     ?>
 
@@ -63,6 +71,7 @@
                     </tr>
             <?php
                 }
+            }
             ?>
         </table>
     </div>    

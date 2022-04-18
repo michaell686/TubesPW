@@ -1,5 +1,5 @@
 <?php
-    include('koneksi.php');
+    include('../../../koneksi.php');
     
     $query = "DELETE FROM prize_rewards WHERE id='" . $_GET["id"] . "'";
 

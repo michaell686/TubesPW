@@ -1,6 +1,12 @@
 <?php
-    include('koneksi.php');
+    include('../../../koneksi.php');
     include('../../functions/HomeFunction.php');
+
+    session_start();
+
+    if (!isset($_SESSION['my_session'])) {
+        $_SESSION['my_session'] = false;
+    }
 ?>
 <html lang="en">
 <head>
@@ -34,11 +40,13 @@
 </head>
 <body>
     <?php
+        if ($_SESSION['my_session']) {
         $home = getHome();
     ?>
 
     <div>
         <h1>Home</h1>
+        <a href="add.php">Add Home</a>
         <table border="1px" class="tabel"> 
             <tr>
                 <th>ID</th>
@@ -57,9 +65,10 @@
                     <td><a href="edit.php?id=<?=$home['id']?>">Edit</a> 
                     <a href='delete.php?id=<?php echo $home["id"]; ?>'>Delete</a></td>
                     </tr>
-            <?php
-                }
-            ?>
+        <?php
+            }
+        }    
+        ?>
         </table>
     </div>    
 </body>

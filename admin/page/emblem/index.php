@@ -1,6 +1,12 @@
 <?php
-    include('koneksi.php');
+    include('../../../koneksi.php');
     include('../../functions/EmblemFunction.php');
+
+    session_start();
+
+    if (!isset($_SESSION['my_session'])) {
+        $_SESSION['my_session'] = false;
+    }
 ?>
 <html lang="en">
 <head>
@@ -34,6 +40,7 @@
 </head>
 <body>
     <?php
+        if ($_SESSION['my_session']) {
         $emblem = getEmblem();
     ?>
 
@@ -56,9 +63,10 @@
                     <td><a href="edit.php?id=<?=$emblem['id']?>">Edit</a> 
                     <a href='delete.php?id=<?php echo $emblem["id"]; ?>'>Delete</a></td>
                     </tr>
-            <?php
-                }
-            ?>
+        <?php
+            }
+        }    
+        ?>
         </table>
     </div>    
 </body>

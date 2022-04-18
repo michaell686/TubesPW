@@ -1,5 +1,12 @@
 <?php
-    include('koneksi.php');
+    include('../../../koneksi.php');
+    include('../../functions/Category_ItemFunction.php');
+
+    session_start();
+
+    if (!isset($_SESSION['my_session'])) {
+        $_SESSION['my_session'] = false;
+    }
 ?>
 <html lang="en">
 <head>
@@ -33,13 +40,8 @@
 </head>
 <body>
     <?php
-        $query = "SELECT * FROM category_item ";
-        $result = mysqli_query($koneksi, $query);
-   
-        if(!$result){
-        die ("Query Error: ".mysqli_errno($koneksi).
-            " - ".mysqli_error($koneksi));
-        }
+        if ($_SESSION['my_session']) {
+        $category_item = getCategory_item();
     ?>
 
     <div>
@@ -53,15 +55,16 @@
             </tr>
 
             <?php
-                while ($category_item = mysqli_fetch_array($result)) {  
+                foreach($category_item as $category_item) {
             ?>
                     <tr>
                     <td><?=$category_item['id']?></td>
                     <td><?=$category_item['category_name']?></td>
                     <td><a href="edit.php?id=<?=$category_item['id']?>">Edit</a> <a href='delete.php?id=<?php echo $category_item["id"]; ?>'>Delete</a></td>
                     </tr>
-            <?php
+            <?php   
                 }
+            }
             ?>
         </table>
     </div>    

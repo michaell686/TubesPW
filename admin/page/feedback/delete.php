@@ -1,5 +1,5 @@
 <?php
-    include('koneksi.php');
+    include('../../../koneksi.php');
     include('../../functions/FeedbackFunction.php');
     
     $msg = deleteFeedback($_GET['id']);

@@ -1,5 +1,12 @@
 <?php
-    include('koneksi.php');
+    include('../../../koneksi.php');
+    include('../../functions/Prize_life_tokenFunction.php');
+
+    session_start();
+
+    if (!isset($_SESSION['my_session'])) {
+        $_SESSION['my_session'] = false;
+    }
 ?>
 <html lang="en">
 <head>
@@ -7,30 +14,50 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>price life token</title>
+    <style>
+        td {
+            padding: 15px;
+            text-align: left;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        th {
+            padding-top: 12px;
+            padding-bottom: 12px;
+            background-color: #6495ED;
+            color: white;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        h1 {
+            text-align: center; 
+        }
+        .tabel {
+            margin-left:auto;
+            margin-right:auto;
+            width : 100%;
+        }
+
+    </style>
 </head>
 <body>
     <?php
-        $query = "SELECT * FROM prize_life_token ";
-        $result = mysqli_query($koneksi, $query);
-   
-        if(!$result){
-        die ("Query Error: ".mysqli_errno($koneksi).
-            " - ".mysqli_error($koneksi));
-        }
+        if ($_SESSION['my_session']) {
+        $prize_life_token = getPrize_life_token();
     ?>
+
 
     <div>
         <h1>prize_life_token</h1>
-        <table border="1px"> 
+        <a href="add.php">tambah Prize life token</a>
+        <table border="1px" class="tabel"> 
             <tr>
-                <td>ID</td>
-                <td>Token</td>
-                <td>Chances</td>
-                <td>Opsi</td>
+                <th>ID</th>
+                <th>Token</th>
+                <th>Chances</th>
+                <th>Opsi</th>
             </tr>
 
             <?php
-                while ($prize_life_token = mysqli_fetch_array($result)) {  
+                foreach($prize_life_token as $prize_life_token) {
             ?>
                     <tr>
                     <td><?=$prize_life_token['id']?></td>
@@ -40,6 +67,7 @@
                     </tr>
             <?php
                 }
+            }
             ?>
         </table>
     </div>    
