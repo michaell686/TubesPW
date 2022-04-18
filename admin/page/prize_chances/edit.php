@@ -1,5 +1,4 @@
 <?php
-    include('../../../koneksi.php');
     include('../../functions/Prize_ChancesFunction.php');
 
     session_start();

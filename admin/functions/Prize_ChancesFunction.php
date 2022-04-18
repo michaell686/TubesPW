@@ -1,6 +1,6 @@
 <?php
     function getPrize_chances(){
-        $link= include('../../../koneksi.php');
+        $link= include('../../koneksi.php');
         $query= "SELECT * FROM prize_chances";
         $result = mysqli_query($koneksi, $query);
         if(!$result){
@@ -11,7 +11,7 @@
     }
 
     function getPrize_chancesById($id){
-        $link= include('../../../koneksi.php');
+        $link= include('../../koneksi.php');
         $query = "SELECT * FROM prize_chances WHERE id = '" . $id . "'";
         $result = mysqli_query($koneksi, $query);
         $prize_chances = mysqli_fetch_array($result);
@@ -24,7 +24,7 @@
     }
     
     function addPrize_chances($prize_id, $type_chances_id){
-        $link= include('../../../koneksi.php');
+        $link= include('../../koneksi.php');
         $prize_idVar = isset($prize_id) ? $prize_id : '';
         $type_chances_idVar = isset($type_chances_id) ? $type_chances_id : '';
         
@@ -39,7 +39,7 @@
     }
 
     function updatePrize_chances($id, $prize_id, $type_chances_id) {
-        $link= include('../../../koneksi.php');
+        $link= include('../../koneksi.php');
         $idVar = isset($id) ? $id : NULL;
         $prize_idVar = isset($prize_id) ? $prize_id : '';
         $type_chances_idVar = isset($type_chances_id) ? $type_chances_id : '';
@@ -55,7 +55,7 @@
     }
     
     function deletePrize_chances($id){
-        $link= include('../../../koneksi.php');
+        $link= include('../../koneksi.php');
         $query = "DELETE FROM prize_chances WHERE id='" . $id . "'";
 
         if (mysqli_query($koneksi, $query)) {

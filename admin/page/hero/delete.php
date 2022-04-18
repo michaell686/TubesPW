@@ -1,5 +1,4 @@
 <?php
-    include('../../../koneksi.php');
     include('../../functions/HeroFunction.php');
     session_start();
 

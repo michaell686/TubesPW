@@ -1,0 +1,57 @@
+@font-face {
+    font-family: "navigasi";
+    src: url("../Asset/font-family/font/Navigasi.ttf");
+  }
+#content {
+    font-family: "navigasi";
+    background-image: url(../Asset/Image/3518004.jpg);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+}
+h1 {
+    font-size: 60px;
+    text-align: center;
+
+}
+.container {
+    width: 1000px;
+    margin: auto;
+    padding: 30px;
+    border-radius: 3px;
+    display: flex;
+    justify-content: space-around;
+    overflow: hidden;
+}
+.container .gallery {
+    width: 28%;
+    position: relative;
+    z-index: 0;
+}
+.container .gallery img {
+    width: 100%;
+    height: 98%;
+    border-radius: 10px;
+    box-shadow: 0px 0px 30px rgb(255,255,255);
+
+}
+.container .gallery span {
+    position: absolute;
+    top: 0;
+    z-index: 2;
+    transition: all 0.35s ease-in;
+    background-color: black;
+    opacity: 0;
+    display: block;
+    width: 100%;
+    height: 98%;
+    border-radius: 10px;
+    font-size: 30px;
+    text-align: center;
+    padding: 180px 90px 90px 90px;
+    font-size: 22px;
+    
+}
+.container .gallery span:hover {
+  opacity: 0.5;
+}

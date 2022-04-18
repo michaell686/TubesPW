@@ -1,5 +1,4 @@
 <?php
-    include('../../../koneksi.php');
     
     $query = "DELETE FROM user WHERE id='" . $_GET["id"] . "'";
 

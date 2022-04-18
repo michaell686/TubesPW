@@ -1,5 +1,4 @@
 <?php
-    include('../../../koneksi.php');
 
     if (!empty($_POST)) {
         

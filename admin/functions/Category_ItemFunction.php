@@ -1,6 +1,6 @@
 <?php
     function getCategory_item(){
-        $link= include('../../../koneksi.php');
+        $link= include('../../koneksi.php');
         $query= "SELECT * FROM category_item";
         $result = mysqli_query($koneksi, $query);
         if(!$result){
@@ -11,7 +11,7 @@
     }
 
     function getCategory_itemById($id){
-        $link= include('../../../koneksi.php');
+        $link= include('../../koneksi.php');
         $query = "SELECT * FROM category_item WHERE id = '" . $id . "'";
         $result = mysqli_query($koneksi, $query);
         $emblem = mysqli_fetch_array($result);
@@ -23,7 +23,7 @@
     }
     
     function addCategory_item($category_name){
-        $link= include('../../../koneksi.php');
+        $link= include('../../koneksi.php');
         $category_NameVar = isset($category_name) ? $category_name : '';
         
         $query = "INSERT INTO category_item (category_name) VALUES ('$category_NameVar')";
@@ -38,7 +38,7 @@
     }
 
     function updateCategory_item($id, $category_name) {
-        $link= include('../../../koneksi.php');
+        $link= include('../../koneksi.php');
         $idVar = isset($id) ? $id : NULL;
         $category_NameVar = isset($category_name) ? $category_name : '';
         
@@ -53,7 +53,7 @@
     }
     
     function deleteCategory_item($id){
-        $link= include('../../../koneksi.php');
+        $link= include('../../koneksi.php');
         $query = "DELETE FROM category_item WHERE id='" . $id . "'";
 
         if (mysqli_query($koneksi, $query)) {

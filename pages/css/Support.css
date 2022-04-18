@@ -1,0 +1,29 @@
+@font-face {
+    font-family: "navigasi";
+    src: url("../Asset/font-family/font/Navigasi.ttf");
+  }
+#content {
+    font-family: "navigasi";
+    background-image: url(../Asset/Image/3518004.jpg);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+}
+h1 {
+    font-size: 30px;
+    padding: 20px;
+}
+.box {
+    width: 250px;
+    height: 400px;
+    margin: auto;
+    padding: 30px;
+    border-radius: 3px;
+    background-color:rgba(18, 73, 124, 0.822);
+    border-radius: 10px;
+    box-shadow: 0px 0px 30px rgb(255,255,255);
+}
+form {
+    margin: 5%;
+    margin-top: 0;
+}

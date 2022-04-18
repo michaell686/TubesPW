@@ -1,5 +1,4 @@
 <?php
-    include('../../../koneksi.php');
     include('../../functions/NewsFunction.php');
 
     session_start();

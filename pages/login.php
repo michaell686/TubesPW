@@ -18,7 +18,7 @@ if (!empty($_POST)) {
         if($result['role'] == 'admin') {
             header("location:../admin/index.php");
         } else {
-            header("location:index.php");
+            header("location:homePage.php");
         }
         
     } else {
@@ -27,15 +27,48 @@ if (!empty($_POST)) {
 }
 ?>
 
-<div class="container-login">
-<form method="post" class="form-sign-in">
-    <h1 class="h3 mb-3 font-weight-normal">Please Sign In</h1>
-    <label for="username" class="sr-only">UserID</label>
-    <input type="text" id="username" name="username" autofocus required
-           placeholder="User ID" class="form-control">
-    <label for="password" class="sr-only">Password</label>
-    <input type="password" id="password" name="password" required
-           class="form-control" placeholder="Password">
-    <input type="submit" class="btn btn-lg btn-primary btn-block" value="Sign In"
-           name="btnSignIn">
-</form></div>
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mobile Legend</title>
+    <link rel="stylesheet" href="css/login.css.css">
+</head>
+
+<body onload="myFunction()">
+<?php 
+    session_start();
+
+    if (!isset($_SESSION['my_session'])) {
+        $_SESSION['my_session'] = false;
+    }
+
+    if($_GET) {
+        $menu = $_GET['menu'];
+        if($menu == 'logout') {
+            session_unset();
+            session_destroy();
+            header("location:../pages/login.php");
+        }
+    }
+?>
+    <img src="Asset/Image/3518004.jpg" alt="">
+    <div id="login">
+        <form method="post">
+            <h1>Please Sign In</h1>
+            <label for="username">UserID</label>
+            <input type="text" id="username" name="username" autofocus required placeholder="User ID">
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" required placeholder="Password">
+            <input type="submit" value="Sign In" name="btnSignIn">
+        </form>
+    </div>
+
+    
+</body>
+
+</html>

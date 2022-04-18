@@ -1,6 +1,6 @@
 <?php
     function getMap(){
-        $link= include('../../../koneksi.php');
+        $link= include('../../koneksi.php');
         $query= "SELECT * FROM map";
         $result = mysqli_query($koneksi, $query);
         if(!$result){
@@ -11,7 +11,7 @@
     }
 
     function getMapByID($id){
-        $link= include('../../../koneksi.php');
+        $link= include('../../koneksi.php');
         $query = "SELECT * FROM map WHERE id = '" . $id . "'";
         $result = mysqli_query($koneksi, $query);
         $map = mysqli_fetch_array($result);
@@ -24,7 +24,7 @@
     }
     
     function addMap($nama, $shape, $coords){
-        $link= include('../../../koneksi.php');
+        $link= include('../../koneksi.php');
         $namaVar = isset($nama) ? $nama : '';
         $shapeVar = isset($shape) ? $shape : '';
         $coordsVar = isset($coords) ? $coords : '';
@@ -40,7 +40,7 @@
     }
 
     function updateMap($id, $nama, $shape, $coords) {
-        $link= include('../../../koneksi.php');
+        $link= include('../../koneksi.php');
         $idVar = isset($id) ? $id : NULL;
         $namaVar = isset($nama) ? $nama : '';
         $shapeVar = isset($shape) ? $shape : '';
@@ -57,7 +57,7 @@
     }
     
     function deleteMap($id){
-        $link= include('../../../koneksi.php');
+        $link= include('../../koneksi.php');
         $query = "DELETE FROM map WHERE id='" . $id . "'";
 
         if (mysqli_query($koneksi, $query)) {

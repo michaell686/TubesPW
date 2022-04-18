@@ -1,6 +1,6 @@
 <?php
     function getFeedback(){
-        $link= include('../../../koneksi.php');
+        $link= include('../../koneksi.php');
         $query= "SELECT * FROM feedback";
         $result = mysqli_query($koneksi, $query);
         if(!$result){
@@ -11,7 +11,7 @@
     }
 
     function getFeedbackById($id){
-        $link= include('../../../koneksi.php');
+        $link= include('../../koneksi.php');
         $query = "SELECT * FROM feedback WHERE id = '" . $id . "'";
         $result = mysqli_query($koneksi, $query);
         $feedback = mysqli_fetch_array($result);
@@ -23,7 +23,7 @@
     }
     
     function addFeedback($id, $nama, $komentar){
-        $link= include('../../../koneksi.php');
+        $link= include('../../koneksi.php');
         $idVar = isset($id) ? $id : '';
         $namaVar = isset($nama) ? $nama : '';
         $komentarVar = isset($komentar) ? $komentar : '';
@@ -39,7 +39,7 @@
     }
 
     function updateFeedback($id, $nama, $komentar) {
-        $link= include('../../../koneksi.php');
+        $link= include('../../koneksi.php');
         $idVar = isset($id) ? $id : NULL;
         $namaVar = isset($nama) ? $nama : '';
         $komentarVar = isset($komentar) ? $komentar : '';
@@ -55,7 +55,7 @@
     }
     
     function deleteFeedback($id){
-        $link= include('../../../koneksi.php');
+        $link= include('../../koneksi.php');
         $query = "DELETE FROM feedback WHERE id='" . $id . "'";
 
         if (mysqli_query($koneksi, $query)) {

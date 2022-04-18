@@ -1,5 +1,4 @@
 <?php
-    include('../../../koneksi.php');
     include('../../functions/Prize_life_tokenFunction.php');
 
     session_start();

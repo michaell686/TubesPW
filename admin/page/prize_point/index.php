@@ -1,5 +1,4 @@
 <?php
-    include('../../../koneksi.php');
 ?>
 <html lang="en">
 <head>

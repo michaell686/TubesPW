@@ -1,5 +1,4 @@
 <?php
-    include('../../../koneksi.php');
     include('../../functions/Category_ItemFunction.php');
     session_start();
 

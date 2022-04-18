@@ -1,6 +1,6 @@
 <?php
     function getNews(){
-        $link= include('../../../koneksi.php');
+        $link= include('../../koneksi.php');
         $query= "SELECT * FROM news";
         $result = mysqli_query($koneksi, $query);
         if(!$result){
@@ -11,7 +11,7 @@
     }
 
     function getNewsById($id){
-        $link= include('../../../koneksi.php');
+        $link= include('../../koneksi.php');
         $query = "SELECT * FROM news WHERE id = '" . $id . "'";
         $result = mysqli_query($koneksi, $query);
         $news = mysqli_fetch_array($result);
@@ -24,7 +24,7 @@
     }
     
     function addNews($judul, $gambar, $deskripsi, $newscol){
-        $link= include('../../../koneksi.php');
+        $link= include('../../koneksi.php');
         $judulVar = isset($judul) ? $judul : '';
         $gambarVar = isset($gambar) ? $gambar : '';
         $deskripsiVar = isset($deskripsi) ? $deskripsi : '';
@@ -41,7 +41,7 @@
     }
 
     function updateNews($id, $judul, $gambar, $deskripsi, $newscol) {
-        $link= include('../../../koneksi.php');
+        $link= include('../../koneksi.php');
         $idVar = isset($id) ? $id : NULL;
         $judulVar = isset($judul) ? $judul : '';
         $gambarVar = isset($gambar) ? $gambar : '';
@@ -59,7 +59,7 @@
     }
     
     function deleteNews($id){
-        $link= include('../../../koneksi.php');
+        $link= include('../../koneksi.php');
         $query = "DELETE FROM news WHERE id='" . $id . "'";
 
         if (mysqli_query($koneksi, $query)) {

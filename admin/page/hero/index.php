@@ -1,5 +1,4 @@
 <?php
-    include('../../../koneksi.php');
     include('../../functions/HeroFunction.php');
 
     session_start();
@@ -43,6 +42,7 @@
     <?php
         if ($_SESSION['my_session']) {
         $heroes = getHero();
+        
     ?>
 
     <div>

@@ -1,5 +1,4 @@
 <?php
-    include('../../../koneksi.php');
     include('../../functions/FeedbackFunction.php');
 ?>
 <html lang="en">

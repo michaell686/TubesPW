@@ -1,6 +1,6 @@
 <?php
     function getPrize_life_token(){
-        $link= include('../../../koneksi.php');
+        $link= include('../../koneksi.php');
         $query= "SELECT * FROM prize_life_token";
         $result = mysqli_query($koneksi, $query);
         if(!$result){
@@ -11,7 +11,7 @@
     }
 
     function getPrize_life_tokenByID($id){
-        $link= include('../../../koneksi.php');
+        $link= include('../../koneksi.php');
         $query = "SELECT * FROM prize_life_token WHERE id = '" . $id . "'";
         $result = mysqli_query($koneksi, $query);
         $prize_chances = mysqli_fetch_array($result);
@@ -24,7 +24,7 @@
     }
     
     function addPrize_life_token($token, $chances){
-        $link= include('../../../koneksi.php');
+        $link= include('../../koneksi.php');
         $tokenVar = isset($token) ? $token : '';
         $chancesVar = isset($chances) ? $chances : '';
         
@@ -39,7 +39,7 @@
     }
 
     function updatePrize_life_token($id, $token, $chances) {
-        $link= include('../../../koneksi.php');
+        $link= include('../../koneksi.php');
         $idVar = isset($id) ? $id : NULL;
         $tokenVar = isset($token) ? $token : '';
         $chancesVar = isset($chances) ? $chances : '';
@@ -56,7 +56,7 @@
     }
     
     function deletePrize_life_token($id){
-        $link= include('../../../koneksi.php');
+        $link= include('../../koneksi.php');
         $query = "DELETE FROM prize_life_token WHERE id='" . $id . "'";
 
         if (mysqli_query($koneksi, $query)) {

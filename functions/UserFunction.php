@@ -8,6 +8,23 @@ function login($username, $password){
     return $user;
 }
 
+function registrasi($name, $attack, $health, $description){
+    $link= include('../../../koneksi.php');
+    $nameVar = isset($name) ? $name : '';
+    $attackVar = isset($attack) ? $attack : '';
+    $healthVar = isset($health) ? $health : '';
+    $descriptionVar = isset($description) ? $description : '';
+    
+    $query = "INSERT INTO hero (name, attack, health, description) VALUES ('$nameVar', '$attackVar', '$healthVar', '$descriptionVar')";
+    $result = mysqli_query($koneksi,$query);
+
+    if($result) {
+        return $result = 'Inserted Successfully!';
+    } else {
+        return $result = 'Failed to insert data!';
+    }
+}
+
 // function fetchUser()
 // {
 //     $link = createConnection();
